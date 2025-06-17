@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class AppView extends StatelessWidget {
-  final StatefulNavigationShell
-      navigationShell; // navigationShell hangi sayfada olduğumuzu tutar.
+  final StatefulNavigationShell navigationShell; // navigationShell hangi sayfada olduğumuzu tutar.
   const AppView({super.key, required this.navigationShell});
 
   @override
@@ -55,27 +54,29 @@ class AppView extends StatelessWidget {
     );
   }
 
+  // NavigationBottomBar theme kısmı için yapıldı.
   Widget _menuItem(BuildContext context,
-      {required int index,
-      required int currentIndex,
-      required String label,
-      required IconData icon}) {
-    return NavigationDestination(
-        icon: Icon(
-          icon,
-          color: currentIndex == index
+      {required int index,  // Menünün belirtilen index değeri
+      required int currentIndex,  // Kullanıcının bulunduğu index değeri
+      required String label,  // Icon altında görünün yazı
+      required IconData icon}) {  // Icon değeri
+    return NavigationDestination( // Widget'ı döndürür ve hedef konumu temsil eder.
+        icon: Icon( icon,
+          color: currentIndex == index  // renk şu şekilde yapıldı. Eğer kulllanıcının index değeri belirtilen indexlerden birine eşit ise 
+          // theme.dart'tan colorScheme çekerek hangisini kullanılıcağı belirtilir.
               ? Theme.of(context).colorScheme.primary
               : Theme.of(context).colorScheme.tertiary,
         ),
         label: label);
   }
 
+  /*
+    Uygulamanını AppBar kısmınıdaki işlevler bulunur.
+  */
   // '_' ile başlanırsa private özellik alır diğer yerlerden ulaşılamaz.
   AppBar _appBarWidget() {
     return AppBar(
-      title: Text(
-        "Rick and Morty",
-        style: TextStyle(fontWeight: FontWeight.w500),
+      title: Text("Rick and Morty", style: TextStyle(fontWeight: FontWeight.w500),
       ),
       actions: [
         IconButton(
